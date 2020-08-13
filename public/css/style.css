@@ -1,0 +1,149 @@
+
+.content, .container-fluid {
+  padding: 0px !important;
+  margin: 0px !important;
+}
+.canvas-wrapper {
+  height: 350px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+.dropdown-item:hover {
+  background-color: #03572C !important; 
+}
+ul.teams {
+  margin-top:8px !important;
+}
+.nav-item {
+  margin-left:10px !important;
+  margin-right:10px !important;
+  cursor: pointer;
+}
+.nav-link.pages {
+  margin:10px 10px 0px 10px !important; /* top right bottom left */
+  font-weight: 300 !important;
+  text-transform: none !important;
+}
+a.nav-link.teams {
+  padding: 3px !important;
+  padding-left:30px !important;
+  margin: 6px 15px 0px 30px !important;
+  font-weight: 300 !important;
+  cursor: pointer;
+}
+.nav-tabs {
+  padding: 0px !important;
+}
+h3 {
+  margin: 5px;
+  font-size: 22px;
+}
+.stats {
+  color: black !important;
+}
+hr {
+  margin-top:8px;
+}
+.card.internal {
+  margin:0px;
+}
+.center {
+  text-align: center !important;
+}
+.left {
+  text-align: left !important;
+}
+.right {
+  text-align: right !important;
+}
+.bold {
+  font-weight:bold;
+}
+.col-md-4{
+  padding-left:5px;
+  padding-right:5px;
+}
+.col-md-3 {
+  padding-left:5px;
+  padding-right:5px;
+}
+.col-md-12.body {
+  margin-top:15px;
+}
+.card-stats {
+  padding-bottom:10px;
+}
+.card-header {
+  padding-top: 10px !important;
+  padding-bottom: 8px !important;
+}
+.card-header.auto {
+  padding:0px !important; 
+  padding-left: 5px !important; 
+  padding-right: 5px !important;
+}
+.sidebar[data-color="green"] li.active>a {
+  background-color: #03572C;
+}
+td {
+  padding:5px !important;
+}
+td.notes {
+  text-align: left;
+  font-size: 13px;
+}
+#rankTable > thead > tr > th {
+  font-size: 12px !important;
+  border-bottom: 4px solid #DDDDDD;
+  cursor: pointer;
+}
+
+/* for progress bars */
+.bg-info, .bg-danger {
+  border-right: 1px solid gray; 
+  padding-left:2.5px; 
+  padding-right:2.5px;
+  min-width: max-content;
+}
+.bg-danger {
+  border-right: 1px solid black;
+}
+/* make drag drop unselectable */
+.unselectable {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.no-marg {
+  margin:0px;
+}
+.no-pad {
+  padding:0px !important;
+}
+
+.close {
+  margin-right:15px; 
+}
+
+.table-bordered {
+  margin-bottom:10px;
+}
+
+div.disabled {
+  opacity:0.35;
+}
+
+tr > th {
+  padding-top:3px !important;
+  padding-bottom:3px !important;
+  font-size:13px !important;
+  font-weight:100;
+  table-layout: fixed;
+}
+.row {
+  margin-left:0px;
+  margin-right:0px;
+}

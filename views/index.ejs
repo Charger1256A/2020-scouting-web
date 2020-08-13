@@ -1,11 +1,301 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<% include header.ejs %>
+<div class="tab-content">
+    <div class="tab-pane active" id="teams">
+        <div class="canvas-wrapper">
+            <canvas id="stats"></canvas>
+        </div>
+        <img style="display:none" id="blue" src="/img/blue-field.png" width="946">
+        <img style="display:none" id="red" src="/img/red-field.png" width="946">
+        <img style="display:none" id="start" src="/img/start.png" width="1024">
+        <img style="display:none" id="Cargo" src="/img/cargo.png">
+        <img style="display:none" id="Hatch" src="/img/hatch.png">
+        <div class="row" style="margin-left: 20px; margin-right:10px;">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning">
+                        <h3 class="card-title">Auto</h3>
+                    </div>
+                    <div class="col-md-12 center body">
+                        <h4>Hatch</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3 id="autoHatchAverage"></h3>
+                                <h6>Avg</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <h3 id="autoHatchRate"></h3>
+                                <h6>Rate</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <h3 id="autoHatchMax"></h3>
+                                <h6>Max</h6>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="col-md-12 center">
+                        <h4>Cargo</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3 id="autoCargoAverage"></h3>
+                                <h6>Avg</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <h3 id="autoCargoRate"></h3>
+                                <h6>Rate</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <h3 id="autoCargoMax"></h3>
+                                <h6>Max</h6>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="col-md-12 center">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#autoPaths">
+                            View Paths
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success">
+                        <h3 class="card-title">Teleop</h3>
+                    </div>
+                    <div class="col-md-12 center body">
+                        <div class="row">
+                            <div class="col-4" style="border-right:1px solid #ddd;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Hatch</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3 id="teleHatchAverage"></h3>
+                                        <h6>Avg</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3 id="teleHatchMax"></h3>
+                                        <h6>Max</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4" style="border-right:1px solid #ddd;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Cargo</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3 id="teleCargoAverage"></h3>
+                                        <h6>Avg</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3 id="teleCargoMax"></h3>
+                                        <h6>Max</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Cargo Ship</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3 id="teleCargoHatchAverage"></h3>
+                                        <h6>Hatch</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3 id="teleCargoCargoAverage"></h3>
+                                        <h6>Cargo</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="col-md-12 center">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Rocket Ship</h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h3 id="teleRocketHatchAverage"></h3>
+                                        <h6>Hatch</h6>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h3 id="teleLevel2HatchAverage"></h3>
+                                        <h6>Lvl 2 Hatch</h6>
+                                    </div>
+                                    <div class="col-md-2" style="border-right:1px solid #ddd;">
+                                        <h3 id="teleLevel3HatchAverage"></h3>
+                                        <h6>Lvl 3 Hatch</h6>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h3 id="teleRocketCargoAverage"></h3>
+                                        <h6>Cargo</h6>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h3 id="teleLevel2CargoAverage"></h3>
+                                        <h6>Lvl 2 Cargo</h6>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h3 id="teleLevel3CargoAverage"></h3>
+                                        <h6>Lvl 3 Cargo</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="col-md-12 center">
+                        <div class="row">
+                            <div class="col-9" style="border-right:1px solid #ddd;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Climb Rates</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="soloClimbLevel2Average"></h3>
+                                        <h6>Lvl 2</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="soloClimbLevel3Average"></h3>
+                                        <h6>Lvl 3</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="assistedClimbLevel2Average"></h3>
+                                        <h6>Assist. Lvl 2</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="assistedClimbLevel3Average"></h3>
+                                        <h6>Assist. Lvl 3</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Robot Died</h4>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h3 id="robotDiedAverage"></h3>
+                                        <h6>Avg</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-md-12">
+                <div class="card card-stats" style="margin-top:20px;">
+                    <div class="card-header card-header-info">
+                        <h3 class="card-title">Miscellaneous</h3>
+                    </div>
+                    <div class="col-md-12 center body">
+                        <div class="row">
+                            <div class="col-6" style="border-right:1px solid #ddd;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Point Contribution</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="pointContributionAverage"></h3>
+                                        <h6>Avg</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="pointContributionStdev"></h3>
+                                        <h6>StDev</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="pointContributionMin"></h3>
+                                        <h6>Min</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="pointContributionMax"></h3>
+                                        <h6>Max</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Average Ratings</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="hatchIntakeRatingAverage"></h3>
+                                        <h6>Hatch Intake</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="cargoIntakeRatingAverage"></h3>
+                                        <h6>Cargo Intake</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="driverRatingAverage"></h3>
+                                        <h6>Driver</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="defenseRatingAverage"></h3>
+                                        <h6>Defense</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="col-md-12 center">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%">Match</th>
+                                                    <th style="width: 10%">Name</th>
+                                                    <th style="text-align: left; width: 50%">Notes</th>
+                                                    <th style="text-align: left; width: 35%">Climb Notes</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="notes">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MODAL TO VIEW AUTO PATHS -->
+            <div class="modal fade" id="autoPaths" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Auto Paths</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="accordion" style="color:black;">
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" style="background-color:#e8e8e8;"
+                                data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% include matches.ejs %>
+    <% include compare.ejs %>
+    <% include picklist.ejs %>
+</div>
+<% include footer.ejs %>

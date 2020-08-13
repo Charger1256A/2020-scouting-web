@@ -1,0 +1,74 @@
+<div class="tab-pane" id="picklist">
+    <div class="col-md-12" style="margin-top:70px; padding-left:20px; padding-right:30px;">
+        <div class="drag-container unselectable">
+            <% var disabled = "" %>
+            <% var team = "" %>
+            <% if(data.picklist != undefined) { %>
+                <% teams = data.picklist %>
+            <% } %>
+            
+            <% for(var i in teams) { %>
+                <% team = teams[i] %>
+                <% if(data.picklist != undefined) { %>
+                    <% team = teams[i]['team'] %>
+                    <% disabled = teams[i]['disabled'] %>
+                <% } %> 
+                <div class="card <%= disabled %>" id="<%= team %>" style="margin-bottom:0px; margin-top:10px;">
+                    <div class="card-header no-pad">
+                        <div class="row">
+                            <div class="col-md-9 no-pad"><h5 class="card-header"><%= team %> - <%= data.teams[team].name %></h5></div>
+                            <div class="col-md-3" style="margin-top:7px;">
+                                <button type="button" class="close" onclick="toggleDisabled(`<%= team %>`)">
+                                    <i class="material-icons"><%= disabled == "" ? 'block' : 'undo' %></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding-top:0px; padding-bottom:0px;">
+                        <div class="row center">
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th width="15%">Pt. Contribution</th>
+                                        <th colspan=3 width="32.5%">Hatch</th>
+                                        <th colspan=3 width="32.5%">Cargo</th>
+                                        <th colspan=2 width="20%">Climb Rates (Lvl 2/3)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th style="font-size:16px !important;" width="15%" id="pointContribution" rowspan="2"></th>
+                                        <th width="10.8%">Auto</th>
+                                        <th width="10.8%">Tele</th>
+                                        <th width="10.8%">Tele Upper</th>
+                                        <th width="10.8%">Auto</th>
+                                        <th width="10.8%">Tele</th>
+                                        <th width="10.8%">Tele Upper</th>
+                                        <th width="10%">Solo</th>
+                                        <th width="10%">Assist.</th>
+                                    </tr>
+                                    <tr>
+                                        <th id="autoHatch"></th>
+                                        <th id="teleHatch"></th>
+                                        <th id="teleUpperHatch"></th>
+                                        <th id="autoCargo"></th>
+                                        <th id="teleCargo"></th>
+                                        <th id="teleUpperCargo"></th>
+                                        <th id="soloClimb" width="10%"></th>
+                                        <th id="assistedClimb" width="10%"></th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('div.drag-container').sortable({
+        items: ':not(.disabled)'
+    });
+</script>
