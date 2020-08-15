@@ -4,14 +4,14 @@ var firebase = require('firebase');
 var request = require('request');
 
 firebase.initializeApp({
-    apiKey: "AIzaSyBDvxiLJvHh-dEvNQph1hys0oSovX7bWGI",
-    authDomain: "scouting-backend.firebaseapp.com",
-    databaseURL: "https://scouting-backend.firebaseio.com",
-    projectId: "scouting-backend",
-    storageBucket: "scouting-backend.appspot.com",
-    messagingSenderId: "78773607889",
-    appId: "1:78773607889:web:9d6252eaa0939bb2d114f0",
-    measurementId: "G-9YDWE6V65K"
+  apiKey: "AIzaSyBDvxiLJvHh-dEvNQph1hys0oSovX7bWGI",
+  authDomain: "scouting-backend.firebaseapp.com",
+  databaseURL: "https://scouting-backend.firebaseio.com",
+  projectId: "scouting-backend",
+  storageBucket: "scouting-backend.appspot.com",
+  messagingSenderId: "78773607889",
+  appId: "1:78773607889:web:9d6252eaa0939bb2d114f0",
+  measurementId: "G-9YDWE6V65K"
 });
 
 firebase.auth().signInAnonymously().catch(function(error) {
@@ -31,6 +31,8 @@ router.get('/:eventKey', function(req, res, next) {
       let teamList = Object.keys(snapshot.val()["teams"]);
       request({headers: {"X-TBA-AUTH-KEY": tbaKey}, url: matchesURL.replace("eventKey", eventKey)}, function (error, response, body) {
         if (!error && response.statusCode == 200) {
+            // console.log(snapshot.val().teams['8']);
+            // console.log(teamList);
             res.render('index', { eventKey: eventKey, teams: teamList, data: snapshot.val(), possibleEvents: possibleEvents, matches: body});
         } else {
           res.send('error', {"error": "Unable to get TBA data."})

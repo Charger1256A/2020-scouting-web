@@ -1,6 +1,7 @@
 // main.js handles main dashboard stuff
 var data, eventKey, teams, quals;
 let playoffs = [];
+generalTeam = '8';
 
 function init() {
     // read data from meta tag
@@ -17,9 +18,34 @@ function init() {
         }
     }
     quals = matches.sort(compare);
+    // console.log(quals)
+    displayAutoData(teams[0]);
     switchTeam(teams[0]);
     initCompare(teams);
     initPicklist();
+}
+
+
+var displayAutoData = () => {
+    // console.log(generalTeam);
+    var d = $("#data").data();
+    data = d["data"];
+    teams = d["teams"].split(",");
+    matches = d["matches"];
+    eventKey = d["event"];
+    // var team = $("a.navbar-brand").show();
+    // console.log(Object.keys(team[0]))
+
+    // alert(JSON.stringify(data["teams"][team]["stats"]["avg"]["autoOuterAverage"]));
+    var lowerAvg = data["teams"][generalTeam]["stats"]["avg"]["autoLowerAverage"];
+    var outerAvg = data["teams"][generalTeam]["stats"]["avg"]["autoOuterAverage"];
+    var innerAvg = data["teams"][generalTeam]["stats"]["avg"]["autoInnerAverage"];
+
+    document.getElementById("autoLowerAverage").innerHTML = lowerAvg;
+    document.getElementById("autoOuterAverage").innerHTML = outerAvg;
+    document.getElementById("autoInnerAverage").innerHTML = innerAvg;
+
+
 }
 
 var toggleTeamList = () => {
@@ -55,13 +81,16 @@ var toggleChart = () => {
 
 // switches team data in main panel
 var switchTeam = (team) => {
+    generalTeam = team;
+    displayAutoData();
+    console.log(team)
     var teamData = data["teams"][team];
     if (teamData == undefined) {
         alert("This team does not exist in this competition.");
         return;
     }
     var teamName = teamData["name"];
-    console.log(team);
+    // console.log(team);
     $("a.navbar-brand").text(`Team ${team} - ${teamName}`);
     addNotes(teamData["qm"]); // compiles all notes in table
     setChart(teamData["qm"]); // generates the chart
@@ -69,6 +98,7 @@ var switchTeam = (team) => {
     // iterate over all stats and set h3 text for each stat
     for (var stat in teamData["stats"]) {
         for (var key in teamData["stats"][stat]) {
+            alert(key);
             if ($(`h3#${key}`).length) {
                 var value = parseFloat(teamData["stats"][stat][key]);
                 if (key.includes("Climb") || key.includes("Rate") || key.includes("Died")) {
@@ -104,10 +134,12 @@ function addNotes(matches) {
 }
 // generate auto paths images
 function setPaths(matches) {
+    console.log(matches);
     $("#accordion").empty();
     for (var m in matches) {
         let match = matches[m]
-        if (match["-"]) continue;
+        console.log(m);
+        // if (match["-"]) continue;
         $("#accordion").append(`
         <div class="card" style="margin-top:15px; margin-bottom:15px;">
         <div class="card-header auto" id="auto${m}">
@@ -123,9 +155,10 @@ function setPaths(matches) {
                 <div class="row" style="height:100%">
                     <div class="col-3">
                         <h6>Starting Position: ${match["startingPosition"]}</h6>
-                        <h6>Hab Bonus: ${match["habBonus"] == 0 ? "No" : "Yes"}</h6>
-                        <h6>Hatches Scored: ${match["autoHatch"]}</h6>
-                        <h6>Cargo Scored: ${match["autoCargo"]}</h6>
+                        <h6>Initiation Line: ${match["habBonus"] == 0 ? "No" : "Yes"}</h6>
+                        <h6>Lower: ${match["autoHatch"]}</h6>
+                        <h6>Outer: ${match["autoCargo"]}</h6>
+                        <h6>Inner: ${match["autoCargo"]}</h6>
                     </div>
                     <div class="col-9">
                         <canvas id="canvasPath${m}" width="1500" height="1050" style = 'width:500px; height:350px;'></canvas>
