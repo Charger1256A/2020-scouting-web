@@ -4,6 +4,7 @@ var initPicklist = () => {
     });
 }
 
+
 function addTeamStats(team) {
     var cardbody = $(".drag-container").find(`#${team}`).find(".card-body");
     let avg = data["teams"][team]["stats"]["avg"];

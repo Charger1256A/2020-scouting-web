@@ -19,15 +19,15 @@
                         <h4>Powercells</h4>
                         <div class="row">
                             <div class="col-md-4">
-                                <h3 id="autoHatchAverage"></h3>
+                                <h3 id="autoPowercellMax"></h3>
                                 <h6>MAX</h6>
                             </div>
                             <div class="col-md-4">
-                                <h3 id="autoHatchRate"></h3>
+                                <h3 id="autoPowercellAverage"></h3>
                                 <h6>AVG</h6>
                             </div>
                             <div class="col-md-4">
-                                <h3 id="autoHatchMax"></h3>
+                                <h3 id="autoPowercellMin"></h3>
                                 <h6>MIN</h6>
                             </div>
                         </div>
@@ -68,14 +68,14 @@
                             <div class="col-4" style="border-right:1px solid #ddd;">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4>Hatch</h4>
+                                        <h4>Lower</h4>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3 id="teleHatchAverage"></h3>
+                                        <h3 id="teleLowerAverage"></h3>
                                         <h6>Avg</h6>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3 id="teleHatchMax"></h3>
+                                        <h3 id="teleLowerMax"></h3>
                                         <h6>Max</h6>
                                     </div>
                                 </div>
@@ -83,14 +83,14 @@
                             <div class="col-4" style="border-right:1px solid #ddd;">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4>Cargo</h4>
+                                        <h4>Outer</h4>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3 id="teleCargoAverage"></h3>
+                                        <h3 id="teleOuterAverage"></h3>
                                         <h6>Avg</h6>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3 id="teleCargoMax"></h3>
+                                        <h3 id="teleOuterMax"></h3>
                                         <h6>Max</h6>
                                     </div>
                                 </div>
@@ -98,15 +98,15 @@
                             <div class="col-4">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4>Cargo Ship</h4>
+                                        <h4>Inner</h4>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3 id="teleCargoHatchAverage"></h3>
-                                        <h6>Hatch</h6>
+                                        <h3 id="teleInnerAverage"></h3>
+                                        <h6>Avg</h6>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3 id="teleCargoCargoAverage"></h3>
-                                        <h6>Cargo</h6>
+                                        <h3 id="teleInnerMax"></h3>
+                                        <h6>Max</h6>
                                     </div>
                                 </div>
                             </div>
@@ -118,32 +118,32 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4>Rocket Ship</h4>
+                                        <h4>Control Panel</h4>
                                     </div>
-                                    <div class="col-md-2">
+                                    <!-- <div class="col-md-2">
                                         <h3 id="teleRocketHatchAverage"></h3>
-                                        <h6>Hatch</h6>
+                                        <h6>Rotation</h6>
                                     </div>
                                     <div class="col-md-2">
                                         <h3 id="teleLevel2HatchAverage"></h3>
                                         <h6>Lvl 2 Hatch</h6>
+                                    </div> -->
+                                    <div class="col-md-6" style="border-right:1px solid #ddd;">
+                                        <h3 id="rotationControlTotal"></h3>
+                                        <h6>Rotation</h6>
                                     </div>
-                                    <div class="col-md-2" style="border-right:1px solid #ddd;">
-                                        <h3 id="teleLevel3HatchAverage"></h3>
-                                        <h6>Lvl 3 Hatch</h6>
+                                    <div class="col-md-6">
+                                        <h3 id="positionControlTotal"></h3>
+                                        <h6>Position</h6>
                                     </div>
-                                    <div class="col-md-2">
-                                        <h3 id="teleRocketCargoAverage"></h3>
-                                        <h6>Cargo</h6>
-                                    </div>
-                                    <div class="col-md-2">
+                                    <!-- <div class="col-md-2">
                                         <h3 id="teleLevel2CargoAverage"></h3>
                                         <h6>Lvl 2 Cargo</h6>
                                     </div>
                                     <div class="col-md-2">
                                         <h3 id="teleLevel3CargoAverage"></h3>
                                         <h6>Lvl 3 Cargo</h6>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -151,37 +151,45 @@
                     </div>
                     <div class="col-md-12 center">
                         <div class="row">
-                            <div class="col-9" style="border-right:1px solid #ddd;">
+                            <div class="col-8" style="border-right:1px solid #ddd;">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4>Climb Rates</h4>
+                                        <h4>Hang Rates</h4>
                                     </div>
                                     <div class="col-md-3">
-                                        <h3 id="soloClimbLevel2Average"></h3>
-                                        <h6>Lvl 2</h6>
+                                        <h3 id="soloHangAverage"></h3>
+                                        <h6>Hang</h6>
                                     </div>
                                     <div class="col-md-3">
-                                        <h3 id="soloClimbLevel3Average"></h3>
-                                        <h6>Lvl 3</h6>
+                                        <h3 id="soloBalancedHangAverage"></h3>
+                                        <h6>Bal. Hang</h6>
                                     </div>
                                     <div class="col-md-3">
+                                        <h3 id="assistedHangAverage"></h3>
+                                        <h6>Assist. Hang</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3 id="assistedBalancedHangAverage"></h3>
+                                        <h6>Assist. Bal. Hang</h6>
+                                    </div>
+                                    <!-- <div class="col-md-3">
                                         <h3 id="assistedClimbLevel2Average"></h3>
                                         <h6>Assist. Lvl 2</h6>
                                     </div>
                                     <div class="col-md-3">
                                         <h3 id="assistedClimbLevel3Average"></h3>
                                         <h6>Assist. Lvl 3</h6>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h4>Robot Died</h4>
                                     </div>
                                     <div class="col-md-12">
                                         <h3 id="robotDiedAverage"></h3>
-                                        <h6>Avg</h6>
+                                        <h6>Total</h6>
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +214,7 @@
                                         <h6>Avg</h6>
                                     </div>
                                     <div class="col-md-3">
-                                        <h3 id="pointContributionStdev"></h3>
+                                        <h3 id="pointContributionstDev"></h3>
                                         <h6>StDev</h6>
                                     </div>
                                     <div class="col-md-3">
@@ -225,12 +233,12 @@
                                         <h4>Average Ratings</h4>
                                     </div>
                                     <div class="col-md-3">
-                                        <h3 id="hatchIntakeRatingAverage"></h3>
-                                        <h6>Hatch Intake</h6>
+                                        <h3 id="intakeAverage"></h3>
+                                        <h6>Powercell Intake</h6>
                                     </div>
                                     <div class="col-md-3">
-                                        <h3 id="cargoIntakeRatingAverage"></h3>
-                                        <h6>Cargo Intake</h6>
+                                        <h3 id="shootingRatingAverage"></h3>
+                                        <h6>Shooting</h6>
                                     </div>
                                     <div class="col-md-3">
                                         <h3 id="driverRatingAverage"></h3>

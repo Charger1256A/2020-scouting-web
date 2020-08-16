@@ -6,19 +6,19 @@ function setChart(matches) {
     let data = {
         labels: [],
         datasets: [{
-                label: "Tele Hatch",
+                label: "Tele Lower",
                 backgroundColor: "#349baf",
                 borderColor: "#349baf",
                 data: [],
             },
             {
-                label: "Tele Cargo",
+                label: "Tele Outer",
                 backgroundColor: "#c64d4d",
                 borderColor: "#c64d4d",
                 data: [],
             },
             {
-                label: "Tele Upper Hatch",
+                label: "Tele Inner",
                 backgroundColor: "#03572C",
                 borderColor: "#03572C",
                 data: [],

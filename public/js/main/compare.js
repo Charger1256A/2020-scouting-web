@@ -1,13 +1,11 @@
 let rankStats = {
     "pointContribution": "Point Contribution",
-    "teleCycles": "Tele Cycles",
-    "teleHatch": "Tele Hatch",
-    "teleCargo": "Tele Cargo",
-    "teleUpperHatch": "Tele Upper Hatch", 
-    "teleUpperCargo": "Tele Upper Cargo",
-    "autoHatch": "Auto Hatch",
-    "autoCargo": "Auto Cargo",
-    "robotDied": "Robot Died",
+    "teleLower": "Lower",
+    "teleOuter": "Outer",
+    "teleInner": "Inner",
+    "telePowercell": "Powercells", 
+    "positionControl": "Position Control",
+    // "robotDied": "Robot Died",
     "driverRating": "Driver Rating"
 }
 let rankData = [];

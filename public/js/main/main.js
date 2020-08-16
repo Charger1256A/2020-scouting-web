@@ -8,6 +8,8 @@ function init() {
     var d = $("#data").data();
     data = d["data"];
     teams = d["teams"].split(",");
+    console.log(teams)
+    console.log(data)
     matches = d["matches"];
     eventKey = d["event"];
     // separate playoffs and quals matches
@@ -41,10 +43,92 @@ var displayAutoData = () => {
     var outerAvg = data["teams"][generalTeam]["stats"]["avg"]["autoOuterAverage"];
     var innerAvg = data["teams"][generalTeam]["stats"]["avg"]["autoInnerAverage"];
 
+    var maxPowercells = data["teams"][generalTeam]["stats"]["max"]["autoPowercellMax"];
+    var avgPowercells = data["teams"][generalTeam]["stats"]["avg"]["autoPowercellAverage"];
+    var minPowercells = data["teams"][generalTeam]["stats"]["min"]["autoPowercellMin"];
+
     document.getElementById("autoLowerAverage").innerHTML = lowerAvg;
     document.getElementById("autoOuterAverage").innerHTML = outerAvg;
     document.getElementById("autoInnerAverage").innerHTML = innerAvg;
 
+    document.getElementById("autoPowercellMax").innerHTML = maxPowercells;
+    document.getElementById("autoPowercellAverage").innerHTML = avgPowercells;
+    document.getElementById("autoPowercellMin").innerHTML = minPowercells;
+
+
+}
+
+var displayTelopData = () => {
+    var d = $("#data").data();
+    data = d["data"];
+    teams = d["teams"].split(",");
+    matches = d["matches"];
+    eventKey = d["event"];
+
+    var lowerAvg = data["teams"][generalTeam]["stats"]["avg"]["teleLowerAverage"];
+    var outerAvg = data["teams"][generalTeam]["stats"]["avg"]["teleOuterAverage"];
+    var innerAvg = data["teams"][generalTeam]["stats"]["avg"]["teleInnerAverage"];
+
+    var lowerMax = data["teams"][generalTeam]["stats"]["max"]["teleLowerMax"];
+    var outerMax = data["teams"][generalTeam]["stats"]["max"]["teleOuterMax"];
+    var innerMax = data["teams"][generalTeam]["stats"]["max"]["teleInnerMax"];
+
+    var soloHang = data["teams"][generalTeam]["stats"]["avg"]["soloHangAverage"];
+    var soloBalancedHang = data["teams"][generalTeam]["stats"]["avg"]["balancedHangAverage"];
+    var assistedHang = data["teams"][generalTeam]["stats"]["avg"]["assistedHangAverage"];
+    var assistedBalanceHang = data["teams"][generalTeam]["stats"]["avg"]["assistedBalancedHangAverage"];
+
+    var rotationControl = data["teams"][generalTeam]["stats"]["total"]["rotationControl"];
+    var positionControl = data["teams"][generalTeam]["stats"]["total"]["positionControl"];
+
+    var robotDied = data["teams"][generalTeam]["stats"]["total"]["robotDiedTotal"];
+    
+
+    document.getElementById("teleLowerAverage").innerHTML = lowerAvg;
+    document.getElementById("teleOuterAverage").innerHTML = outerAvg;
+    document.getElementById("teleInnerAverage").innerHTML = innerAvg;
+
+    document.getElementById("teleLowerMax").innerHTML = lowerMax;
+    document.getElementById("teleOuterMax").innerHTML = outerMax;
+    document.getElementById("teleInnerMax").innerHTML = innerMax;
+
+    document.getElementById("soloHangAverage").innerHTML = soloHang;
+    document.getElementById("soloBalancedHangAverage").innerHTML = soloBalancedHang;
+    document.getElementById("assistedHangAverage").innerHTML = assistedHang;
+    document.getElementById("assistedBalancedHangAverage").innerHTML = assistedBalanceHang;
+
+    document.getElementById("rotationControlTotal").innerHTML = rotationControl
+    document.getElementById("positionControlTotal").innerHTML = positionControl
+
+    document.getElementById("robotDiedAverage").innerHTML = robotDied;
+}
+
+var displayMiscellaneousData = () => {
+    var d = $("#data").data();
+    data = d["data"];
+    teams = d["teams"].split(",");
+    matches = d["matches"];
+    eventKey = d["event"];
+
+    var pointContributionAvg = data["teams"][generalTeam]["stats"]["avg"]["pointContributionAverage"];
+    var pointContributionStdev = data["teams"][generalTeam]["stats"]["stDev"]["pointContributionStdev"];
+    var pointContributionMin = data["teams"][generalTeam]["stats"]["min"]["pointContributionMin"];
+    var pointContributionMax = data["teams"][generalTeam]["stats"]["max"]["pointContributionMax"];
+
+    var intake = data["teams"][generalTeam]["stats"]["avg"]["powercellIntakeRatingAverage"];
+    var shooting = data["teams"][generalTeam]["stats"]["avg"]["shootingRatingAverage"]
+    var driving = data["teams"][generalTeam]["stats"]["avg"]["driverRatingAverage"];
+    var defense = data["teams"][generalTeam]["stats"]["avg"]["defenseRatingAverage"];
+
+    document.getElementById("pointContributionAverage").innerHTML = pointContributionAvg;
+    document.getElementById("pointContributionstDev").innerHTML = pointContributionStdev;
+    document.getElementById("pointContributionMin").innerHTML = pointContributionMin;
+    document.getElementById("pointContributionMax").innerHTML = pointContributionMax;
+
+    document.getElementById("intakeAverage").innerHTML = intake;
+    document.getElementById("driverRatingAverage").innerHTML = driving;
+    document.getElementById("defenseRatingAverage").innerHTML = defense;
+    document.getElementById("shootingRatingAverage").innerHTML = shooting
 
 }
 
@@ -83,6 +167,8 @@ var toggleChart = () => {
 var switchTeam = (team) => {
     generalTeam = team;
     displayAutoData();
+    displayTelopData();
+    displayMiscellaneousData();
     console.log(team)
     var teamData = data["teams"][team];
     if (teamData == undefined) {
@@ -98,7 +184,7 @@ var switchTeam = (team) => {
     // iterate over all stats and set h3 text for each stat
     for (var stat in teamData["stats"]) {
         for (var key in teamData["stats"][stat]) {
-            alert(key);
+            // alert(key);
             if ($(`h3#${key}`).length) {
                 var value = parseFloat(teamData["stats"][stat][key]);
                 if (key.includes("Climb") || key.includes("Rate") || key.includes("Died")) {
@@ -138,7 +224,7 @@ function setPaths(matches) {
     $("#accordion").empty();
     for (var m in matches) {
         let match = matches[m]
-        console.log(m);
+        console.log(match);
         // if (match["-"]) continue;
         $("#accordion").append(`
         <div class="card" style="margin-top:15px; margin-bottom:15px;">
