@@ -4,7 +4,6 @@ let rankStats = {
     "teleOuter": "Outer",
     "teleInner": "Inner",
     "telePowercell": "Powercells", 
-    "positionControl": "Position Control",
     // "robotDied": "Robot Died",
     "driverRating": "Driver Rating"
 }
@@ -16,6 +15,8 @@ var initCompare = (teams) => {
         for (var stat in rankStats) {
             if (data["teams"][teams[team]]["stats"] != undefined) {
                 let teamStat = data["teams"][teams[team]]["stats"]["avg"][`${stat}Average`];
+                console.log(stat)
+                console.log(teamStat);
                 teamData[stat] = teamStat.countDecimals() > 3 ? teamStat.toFixed(2) : teamStat;
             }
         }

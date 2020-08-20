@@ -82,6 +82,8 @@ var displayTelopData = () => {
     var positionControl = data["teams"][generalTeam]["stats"]["total"]["positionControl"];
 
     var robotDied = data["teams"][generalTeam]["stats"]["total"]["robotDiedTotal"];
+
+    var favoritePosition = data["teams"][generalTeam]["stats"]["avg"]["telePowercellAverage"];
     
 
     document.getElementById("teleLowerAverage").innerHTML = lowerAvg;
@@ -101,6 +103,8 @@ var displayTelopData = () => {
     document.getElementById("positionControlTotal").innerHTML = positionControl
 
     document.getElementById("robotDiedAverage").innerHTML = robotDied;
+
+    document.getElementById("favoritePosition").innerHTML = favoritePosition;
 }
 
 var displayMiscellaneousData = () => {
@@ -208,12 +212,15 @@ function addNotes(matches) {
     $("tbody#notes").empty(); // clear it first
     for (var m in matches) {
         if (matches[m]["-"]) continue;
+        notes = matches[m]["notes"].replace(/>/g, " ");
+        hangNotes = matches[m]["hangNotes"].replace(/>/g, " ");
+        // console.log(notes)
         $("tbody#notes").append(`
         <tr>
             <td>${m}</td>
             <td>${matches[m]["name"]}</td>
-            <td class="notes">${matches[m]["notes"]}</td>
-            <td class="notes">${matches[m]["climbNotes"]}</td>
+            <td class="notes">${notes}</td>
+            <td class="notes">${hangNotes}</td>
         </tr>
         `);
     }
@@ -225,7 +232,7 @@ function setPaths(matches) {
     for (var m in matches) {
         let match = matches[m]
         console.log(match);
-        // if (match["-"]) continue;
+        if (match["-"]) continue;
         $("#accordion").append(`
         <div class="card" style="margin-top:15px; margin-bottom:15px;">
         <div class="card-header auto" id="auto${m}">
@@ -242,9 +249,9 @@ function setPaths(matches) {
                     <div class="col-3">
                         <h6>Starting Position: ${match["startingPosition"]}</h6>
                         <h6>Initiation Line: ${match["habBonus"] == 0 ? "No" : "Yes"}</h6>
-                        <h6>Lower: ${match["autoHatch"]}</h6>
-                        <h6>Outer: ${match["autoCargo"]}</h6>
-                        <h6>Inner: ${match["autoCargo"]}</h6>
+                        <h6>Lower: ${match["autoLower"]}</h6>
+                        <h6>Outer: ${match["autoOuter"]}</h6>
+                        <h6>Inner: ${match["autoInner"]}</h6>
                     </div>
                     <div class="col-9">
                         <canvas id="canvasPath${m}" width="1500" height="1050" style = 'width:500px; height:350px;'></canvas>
@@ -264,18 +271,18 @@ function generateImage(match, m) {
     ctx.drawImage(document.getElementById('start'),startingPosition[0],startingPosition[1],70,70);
     ctx.lineWidth = "6";
     ctx.font = "25px Arial";
-    for (var e in match["autoEvents"]) {
-        let event = match["autoEvents"][e]["event"];
-        let x = event.location.includes("Rocket") ? pos[event.location]["x"][event.position[0]] : pos[event.location]["x"][event.position[1]];
-        let y = pos[event.location]["y"][event.position[0]];
-        ctx.drawImage(document.getElementById(event.itemScored),x,y,90,90);
-        ctx.beginPath();
-        ctx.strokeStyle = event.success == 1 ? "green" : "red";
-        ctx.rect(x, y, 90,90);
-        ctx.fillText((match["autoEvents"][e]["time"]/1000).toFixed(2), x, y-10);
-        event.location.includes("Rocket") ? ctx.fillText(`Lvl ${event.position[1]}`, x, y+115) : "";
-        ctx.stroke();
-    }
+    // for (var e in match["autoEvents"]) {
+    //     let event = match["autoEvents"][e]["event"];
+    //     let x = event.location.includes("Rocket") ? pos[event.location]["x"][event.position[0]] : pos[event.location]["x"][event.position[1]];
+    //     let y = pos[event.location]["y"][event.position[0]];
+    //     ctx.drawImage(document.getElementById(event.itemScored),x,y,90,90);
+    //     ctx.beginPath();
+    //     ctx.strokeStyle = event.success == 1 ? "green" : "red";
+    //     ctx.rect(x, y, 90,90);
+    //     ctx.fillText((match["autoEvents"][e]["time"]/1000).toFixed(2), x, y-10);
+    //     event.location.includes("Rocket") ? ctx.fillText(`Lvl ${event.position[1]}`, x, y+115) : "";
+    //     ctx.stroke();
+    // }
     var autoImage = `<img src="${canvas.toDataURL()}" class="img-fluid"/>`;
     return autoImage;
 }

@@ -24,12 +24,6 @@ function setChart(matches) {
                 data: [],
             },
             {
-                label: "Tele Upper Cargo",
-                backgroundColor: "#9977d1",
-                borderColor: "#9977d1",
-                data: [],
-            },
-            {
                 label: "Point Contribution",
                 backgroundColor: "#ffc823",
                 borderColor: "#ffc823",
@@ -39,11 +33,10 @@ function setChart(matches) {
     };
     for (var match in matches) {
         data.labels.push(`Q${match}`);
-        data.datasets[0].data.push(matches[match]["teleHatch"]);
-        data.datasets[1].data.push(matches[match]["teleCargo"]);
-        data.datasets[2].data.push(matches[match]["teleUpperHatch"]);
-        data.datasets[3].data.push(matches[match]["teleUpperCargo"]);
-        data.datasets[4].data.push(matches[match]["pointContribution"]);
+        data.datasets[0].data.push(matches[match]["teleLower"]);
+        data.datasets[1].data.push(matches[match]["teleOuter"]);
+        data.datasets[2].data.push(matches[match]["teleInner"]);
+        data.datasets[3].data.push(matches[match]["pointContribution"]);
     }
     for (var s in data.datasets) {
         let set = data.datasets[s];

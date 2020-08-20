@@ -7,17 +7,17 @@ let compLevels = {
 // key is display  name, x is an arbitrary average amount to calibrate widths of progress bars 
 let barStats = {
     "pointContribution": {"key": "Pt. Contribution", "x": 25}, // default 25
-    "autoHatch": {"key": "Auto Hatch", "x": 1},
-    "autoCargo": {"key": "Auto Cargo", "x": 1},
-    "teleHatch": {"key": "Tele Hatch", "x": 6}, // default: 6
-    "teleCargo": {"key": "Tele Cargo", "x": 6},
-    "teleUpperHatch": {"key": "Tele Upper Hatch", "x": 3}, // default: 3
-    "teleUpperCargo": {"key": "Tele Upper Cargo", "x": 3}
+    "autoLower": {"key": "Auto Lower", "x": 1},
+    "autoOuter": {"key": "Auto Outer", "x": 1},
+    "autoInner": {"key": "Tele Inner", "x": 6}, // default: 6
+    "teleLower": {"key": "Tele Lower", "x": 6},
+    "teleOuter": {"key": "Tele Outer", "x": 3}, // default: 3
+    "teleInner": {"key": "Tele Inner", "x": 3}
 }
 
 let rateStats = {
-    "soloClimb": {"key": "Solo Climb (Lvl 2/Lvl 3)"},
-    "assistedClimb": {"key": "Assisted Climb (Lvl 2/Lvl 3)"},
+    "soloHang": {"key": "Solo Hang"},
+    "assistedHang": {"key": "Assisted Climb (Lvl 2/Lvl 3)"},
     "robotDied": {"key": "Robot Died"}
 }
 
@@ -67,7 +67,7 @@ var filterMatches = (teamNo) => {
 
 function appendMatch(match) {
     let key = match["key"];
-    console.log(key);
+    // console.log(key);
     let teams = {
         "blue": match["alliances"]["blue"]["team_keys"].map(function (t) { return t.replace('frc', '')}),
         "red": match["alliances"]["red"]["team_keys"].map(function (t) { return t.replace('frc', '')})
@@ -96,7 +96,6 @@ function appendMatch(match) {
                             </div>
                             <div class="col-6 right">
                                 <h2 style="margin-bottom:0px">${match["alliances"]["blue"]["score"]}</h2>
-                                <p style="font-weight:100;">${(winProb*100).toFixed(1)}%</p>
                             </div>
                         </div>
                     </div>
@@ -104,7 +103,6 @@ function appendMatch(match) {
                         <div class="row">
                             <div class="col-6 left">
                                 <h2 style="margin-bottom:0px">${match["alliances"]["red"]["score"]}</h2>
-                                <p>${((1-winProb)*100).toFixed(1)}%</p>
                             </div>
                             <div class="col-6" id="redTeams">
                             </div>
@@ -159,13 +157,9 @@ function appendMatch(match) {
         for (var i = 0; i < teams["blue"].length; i++) {
             let blueStats = d[teams["blue"][i]]["stats"]["avg"];
             let redStats = d[teams["red"][i]]["stats"]["avg"];
-            if (stat.includes("Climb")) {
-                rateDiv.find(`#${stat}Blue`).append(`<div class="col-4"><h5>${blueStats[stat+"Level2Average"].toFixed(2)*100}/${blueStats[stat+"Level3Average"].toFixed(2)*100}%</h5></div>`);
-                rateDiv.find(`#${stat}Red`).append(`<div class="col-4"><h5>${redStats[stat+"Level2Average"].toFixed(2)*100}/${redStats[stat+"Level3Average"].toFixed(2)*100}%</h5></div>`);
-            } else {
-                rateDiv.find(`#${stat}Blue`).append(`<div class="col-4"><h5>${blueStats[stat+"Average"].toFixed(2)*100}%</h5></div>`);
-                rateDiv.find(`#${stat}Red`).append(`<div class="col-4"><h5>${redStats[stat+"Average"].toFixed(2)*100}%</h5></div>`);    
-            }
+            rateDiv.find(`#${stat}Blue`).append(`<div class="col-4"><h5>${blueStats[stat+"Average"].toFixed(2)*100}%</h5></div>`);
+            rateDiv.find(`#${stat}Red`).append(`<div class="col-4"><h5>${redStats[stat+"Average"].toFixed(2)*100}%</h5></div>`);    
+            
         }
     }
     // progress bar stats

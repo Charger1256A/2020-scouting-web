@@ -13,8 +13,8 @@ function addTeamStats(team) {
         stat = stat.countDecimals() > 3 ? stat.toFixed(2) : stat;
         cardbody.find(`#${s}`).append(stat)
     }
-    cardbody.find("#soloClimb").append(`${avg["soloClimbLevel2Average"].toFixed(3)*100}/${avg["soloClimbLevel3Average"].toFixed(3)*100}%`);
-    cardbody.find("#assistedClimb").append(`${avg["assistedClimbLevel2Average"].toFixed(3)*100}/${avg["assistedClimbLevel3Average"].toFixed(3)*100}%`)
+    cardbody.find("#soloHang").append(`${avg["soloHangAverage"].toFixed(3)*100}/${avg["balancedHangAverage"].toFixed(3)*100}%`);
+    cardbody.find("#assistedHang").append(`${avg["assistedHangAverage"].toFixed(3)*100}/${avg["assistedBalancedHangAverage"].toFixed(3)*100}%`)
 }
 
 // makes a fetch request to save the picklist to firebase server
