@@ -83,7 +83,7 @@ var displayTelopData = () => {
 
     var robotDied = data["teams"][generalTeam]["stats"]["total"]["robotDiedTotal"];
 
-    var favoritePosition = data["teams"][generalTeam]["stats"]["avg"]["telePowercellAverage"];
+    var favoritePosition = data["teams"][generalTeam]["stats"]["avg"]["telePositionAverage"];
     
 
     document.getElementById("teleLowerAverage").innerHTML = lowerAvg;
@@ -191,7 +191,7 @@ var switchTeam = (team) => {
             // alert(key);
             if ($(`h3#${key}`).length) {
                 var value = parseFloat(teamData["stats"][stat][key]);
-                if (key.includes("Climb") || key.includes("Rate") || key.includes("Died")) {
+                if (key.includes("Climb") || key.includes("Rate")) {
                     if (isNaN(value)) {
                         $(`h3#${key}`).text(`0%`);
                     } else {

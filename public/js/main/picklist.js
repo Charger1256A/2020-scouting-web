@@ -8,13 +8,14 @@ var initPicklist = () => {
 function addTeamStats(team) {
     var cardbody = $(".drag-container").find(`#${team}`).find(".card-body");
     let avg = data["teams"][team]["stats"]["avg"];
+    let tot =  data["teams"][team]["stats"]["total"];
     for (var s in barStats) {
         let stat = avg[`${s}Average`];
         stat = stat.countDecimals() > 3 ? stat.toFixed(2) : stat;
         cardbody.find(`#${s}`).append(stat)
     }
-    cardbody.find("#soloHang").append(`${avg["soloHangAverage"].toFixed(3)*100}/${avg["balancedHangAverage"].toFixed(3)*100}%`);
-    cardbody.find("#assistedHang").append(`${avg["assistedHangAverage"].toFixed(3)*100}/${avg["assistedBalancedHangAverage"].toFixed(3)*100}%`)
+    cardbody.find("#soloHang").append(`${tot["soloHangTotal"]}/${tot["soloBalancedHangTotal"]}`);
+    cardbody.find("#assistedHang").append(`${tot["assistedHangTotal"]}/${tot["assistedBalancedHangTotal"]}`)
 }
 
 // makes a fetch request to save the picklist to firebase server

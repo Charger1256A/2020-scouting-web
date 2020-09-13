@@ -64,13 +64,13 @@ function setChart(matches) {
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: '# Hatch/Cargo'
+                        labelString: '# Powercells'
                     },
                     position: 'left',
                     id: 'items',
                     ticks: {
                         beginAtZero: true,
-                        suggestedMax: 8
+                        suggestedMax: 15
                     }
                 }, {
                     scaleLabel: {

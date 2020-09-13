@@ -157,8 +157,8 @@ function appendMatch(match) {
         for (var i = 0; i < teams["blue"].length; i++) {
             let blueStats = d[teams["blue"][i]]["stats"]["avg"];
             let redStats = d[teams["red"][i]]["stats"]["avg"];
-            rateDiv.find(`#${stat}Blue`).append(`<div class="col-4"><h5>${blueStats[stat+"Average"].toFixed(2)*100}%</h5></div>`);
-            rateDiv.find(`#${stat}Red`).append(`<div class="col-4"><h5>${redStats[stat+"Average"].toFixed(2)*100}%</h5></div>`);    
+            rateDiv.find(`#${stat}Blue`).append(`<div class="col-4"><h5>${blueStats[stat+"Average"].toFixed(2)}%</h5></div>`);
+            rateDiv.find(`#${stat}Red`).append(`<div class="col-4"><h5>${redStats[stat+"Average"].toFixed(2)}%</h5></div>`);    
             
         }
     }
